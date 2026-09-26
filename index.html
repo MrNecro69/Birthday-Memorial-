@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#080808">
+<title>Birthday Memories</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=DM+Mono:wght@300;400&family=Inter:wght@300;400;500&display=swap');
+:root{--bg:#080808;--paper:#eee8dd;--ink:#171717;--gold:#d7b77a;--rose:#bd7e86;--white:#f7f2e9}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;background:#080808}body{margin:0;background:var(--bg);color:var(--white);font-family:Inter,system-ui,sans-serif;overflow-x:hidden}body:after{content:"";position:fixed;inset:0;z-index:100;pointer-events:none;opacity:.045;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.mono{font:10px "DM Mono",monospace;letter-spacing:3px;text-transform:uppercase}.serif{font-family:"Cormorant Garamond",serif}
+.progress{position:fixed;z-index:200;top:0;left:0;width:0;height:2px;background:linear-gradient(90deg,var(--rose),var(--gold))}
+.hero{min-height:100svh;display:grid;place-items:center;position:relative;overflow:hidden;background:radial-gradient(circle at 50% 40%,#33231d,#17110e 28%,#080808 68%)}.hero:before{content:"";position:absolute;width:65vw;height:65vw;border-radius:50%;background:#d7b77a12;filter:blur(80px);animation:breathe 7s ease-in-out infinite}@keyframes breathe{50%{transform:scale(1.2);opacity:.55}}
+.heroContent{text-align:center;position:relative;z-index:2;padding:30px 22px}.kicker{color:#d7b77a99;margin-bottom:20px}.hero h1{font:400 clamp(78px,24vw,190px)/.72 "Cormorant Garamond";letter-spacing:-6px}.hero h1 span{display:inline-block;animation:float 4s ease-in-out infinite}.hero h1 span:nth-child(2){animation-delay:-1.2s}.hero h1 span:nth-child(3){animation-delay:-2.4s}@keyframes float{50%{transform:translateY(-8px)}}
+.heroSub{max-width:410px;margin:28px auto 0;color:#d9d2c7aa;font-size:14px;line-height:1.85}.start{margin:30px auto 0;display:flex;align-items:center;gap:12px;padding:13px 18px;border:1px solid #d7b77a66;border-radius:999px;background:#d7b77a0d;color:#f4ead9;cursor:pointer;font:10px "DM Mono";letter-spacing:2px;text-transform:uppercase;backdrop-filter:blur(15px);transition:.3s}.start:hover{transform:translateY(-3px);background:#d7b77a18}.disc{width:27px;height:27px;border:1px solid #d7b77a88;border-radius:50%;display:grid;place-items:center}.playing .disc{animation:spin 2.5s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}.songState{margin-top:10px;color:#fff5;font:10px "DM Mono";letter-spacing:1px}.scrollHint{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;color:#fff6}.scrollHint i{height:42px;width:1px;background:linear-gradient(var(--gold),transparent);animation:peek 1.7s infinite}@keyframes peek{50%{height:60px;opacity:.4}}
+
+.memory{min-height:100svh;padding:100px 20px 115px;display:flex;align-items:center;position:relative;overflow:hidden}.dark{background:#0b0b0b}.warm{background:#181310}.paper{background:var(--paper);color:var(--ink)}.container{width:min(1080px,100%);margin:auto}.label{color:var(--gold);opacity:.8;margin-bottom:18px}.title{font:500 clamp(44px,9vw,88px)/.9 "Cormorant Garamond";letter-spacing:-2px}.copy{max-width:600px;margin-top:22px;font-size:15px;line-height:1.9;color:#d6d0c7b0}.paper .copy{color:#29251fb0}
+.memoryGrid{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center;margin-top:40px}.photo{position:relative;background:#151515;padding:10px 10px 42px;box-shadow:0 25px 70px #0008;opacity:0;transform:translateY(40px) rotate(-2deg);transition:1s}.photo.visible{opacity:1;transform:translateY(0) rotate(-2deg)}.photo.pink{background:#dfb9b8;color:#251a1a;transform:translateY(40px) rotate(2.5deg)}.photo.pink.visible{transform:translateY(0) rotate(2.5deg)}.photo.tilt{transform:translateY(40px) rotate(-4deg)}.photo.tilt.visible{transform:translateY(0) rotate(-4deg)}.photo img{display:block;width:100%;height:100%;object-fit:cover;background:#242424}.photo figcaption{position:absolute;left:14px;bottom:13px;font:12px "Cormorant Garamond";color:#f3eadf}.pink figcaption{color:#251a1a}.placeholder{display:grid;place-items:center;color:#ffffff38;font:10px "DM Mono";letter-spacing:2px}.memoryGrid .photo:first-child{height:500px}.memoryGrid .photo:nth-child(2){height:330px;margin-top:130px}.memoryGrid .photo:nth-child(3){height:280px;margin-top:-80px}
+.polaroids{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:50px}.polaroids .photo{height:300px;padding:8px 8px 34px}.polaroids .photo:nth-child(2){margin-top:60px}.polaroids .photo:nth-child(3){transform:translateY(40px) rotate(3deg);margin-top:-25px}.polaroids .photo:nth-child(3).visible{transform:translateY(0) rotate(3deg)}
+.film{margin-top:45px;padding:14px 0;border-top:1px solid #fff1;border-bottom:1px solid #fff1;overflow:hidden}.filmTrack{display:flex;gap:12px;width:max-content;animation:film 30s linear infinite}.film img{width:150px;height:100px;object-fit:cover;filter:saturate(.65);flex:none}@keyframes film{to{transform:translateX(-50%)}}
+.timeline{position:relative;max-width:700px;margin:55px auto 0}.timeline:before{content:"";position:absolute;left:15px;top:0;bottom:0;width:1px;background:linear-gradient(#d7b77a55,#d7b77a05)}.event{position:relative;padding:0 0 55px 50px}.event:before{content:"";position:absolute;left:10px;top:5px;width:11px;height:11px;border:1px solid var(--gold);border-radius:50%;background:#0b0b0b}.event h3{font:500 28px "Cormorant Garamond";margin-bottom:8px}.event p{font-size:13px;line-height:1.8;color:#fff9}
+.letter{max-width:650px;margin:40px auto 0;background:#eee8dd;color:#1e1b18;padding:44px 30px;box-shadow:20px 25px 60px #0007;transform:rotate(-1deg)}.letter:before{content:"";position:absolute}.letter h2{font:500 54px "Cormorant Garamond";margin:28px 0 20px}.letter p{font:16px/1.9 "Cormorant Garamond";margin-top:10px}.sign{margin-top:35px;font:italic 25px "Cormorant Garamond"}
+.birthday{min-height:100svh;display:grid;place-items:center;text-align:center;padding:70px 22px;background:radial-gradient(circle at 50% 40%,#3a2922,#0a0908 62%);position:relative;overflow:hidden}.ring{position:absolute;width:60vw;height:60vw;border:1px solid #d7b77a22;border-radius:50%;animation:ring 8s linear infinite}.ring.r2{width:82vw;height:82vw;animation-duration:13s;animation-direction:reverse}@keyframes ring{to{transform:rotate(360deg)}}.birthday h2{font:400 clamp(55px,15vw,130px)/.78 "Cormorant Garamond";letter-spacing:-4px}.birthday h2 span{color:var(--gold)}.age{margin:25px 0;font:10px "DM Mono";letter-spacing:4px;color:#fff7}.final{max-width:600px;margin:25px auto 0;color:#d7d0c7b8;line-height:1.9;font-size:14px}
+.reveal{opacity:0;transform:translateY(35px);transition:1s cubic-bezier(.2,.8,.2,1)}.reveal.visible{opacity:1;transform:none}.delay1{transition-delay:.12s}.delay2{transition-delay:.24s}.delay3{transition-delay:.36s}
+.floating{position:fixed;right:16px;bottom:17px;z-index:150;width:48px;height:48px;border:1px solid #fff2;background:#111c;color:#fff;border-radius:50%;backdrop-filter:blur(15px);cursor:pointer}
+@media(max-width:720px){.memory{min-height:auto;padding:90px 18px 110px}.memoryGrid{grid-template-columns:1fr;gap:22px}.memoryGrid .photo:first-child{height:60svh;min-height:350px}.memoryGrid .photo:nth-child(2){height:42svh;margin:0 14% 0 4%}.memoryGrid .photo:nth-child(3){height:36svh;margin:0 4% 0 15%}.polaroids{grid-template-columns:1fr 1fr;gap:13px}.polaroids .photo{height:245px}.polaroids .photo:nth-child(2){margin-top:42px}.polaroids .photo:nth-child(3){grid-column:1/3;height:310px;margin-top:0}.film img{width:120px;height:82px}.letter{padding:38px 23px}.letter h2{font-size:47px}.title{font-size:54px}}@media(max-width:390px){.hero h1{font-size:82px}.memoryGrid .photo:first-child{height:55svh}.letter h2{font-size:42px}}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+
+<section class="hero" id="top">
+<div class="heroContent">
+<div class="mono kicker">A LITTLE ARCHIVE OF YOU</div>
+<h1><span>M</span><span>e</span><span>m</span>ories.</h1>
+<p class="heroSub">Some birthdays are celebrated for a day.<br>Some people become memories we keep forever.</p>
+<button class="start" id="startSong"><span class="disc">▶</span><span>start the song</span></button>
+<div class="songState" id="songState">song.mp3 · press once, then scroll</div>
+<audio id="song" preload="metadata" loop><source src="song.mp3" type="audio/mpeg"></audio>
+</div>
+<div class="scrollHint"><span class="mono">scroll for memories</span><i></i></div>
+</section>
+
+<section class="memory dark">
+<div class="container">
+<div class="mono label reveal">01 / the beginning</div>
+<h2 class="title reveal delay1">Before the memories,<br>there was <em>you.</em></h2>
+<p class="copy reveal delay2">A collection of tiny moments, random smiles, old conversations and days that became important without asking permission.</p>
+<div class="memoryGrid">
+<figure class="photo reveal"><img src="photos/01.jpg" alt="Memory 01" onerror="this.style.display='none';this.classList.add('missing');this.parentElement.classList.add('placeholder');this.parentElement.querySelector('figcaption').textContent='ADD PHOTOS / 01.JPG'"><figcaption>the first frame</figcaption></figure>
+<figure class="photo pink reveal delay1"><img src="photos/02.jpg" alt="Memory 02" onerror="this.style.display='none';this.parentElement.classList.add('placeholder');this.parentElement.querySelector('figcaption').textContent='ADD PHOTOS / 02.JPG'"><figcaption>and then, another</figcaption></figure>
+<figure class="photo tilt reveal delay2"><img src="photos/03.jpg" alt="Memory 03" onerror="this.style.display='none';this.parentElement.classList.add('placeholder');this.parentElement.querySelector('figcaption').textContent='ADD PHOTOS / 03.JPG'"><figcaption>kept this one</figcaption></figure>
+</div>
+</div>
+</section>
+
+<section class="memory paper">
+<div class="container">
+<div class="mono label reveal">02 / little moments</div>
+<h2 class="title reveal delay1">The moments<br>we almost forget.</h2>
+<p class="copy reveal delay2">The ordinary ones usually become the precious ones later.</p>
+<div class="polaroids">
+<figure class="photo reveal"><img src="photos/04.jpg" alt="Memory 04" onerror="this.style.display='none';this.parentElement.classList.add('placeholder');this.parentElement.querySelector('figcaption').textContent='04.JPG'"><figcaption>04 / somewhere</figcaption></figure>
+<figure class="photo reveal delay1"><img src="photos/05.jpg" alt="Memory 05" onerror="this.style.display='none';this.parentElement.classList.add('placeholder');this.parentElement.querySelector('figcaption').textContent='05.JPG'"><figcaption>05 / that day</figcaption></figure>
+<figure class="photo reveal delay2"><img src="photos/06.jpg" alt="Memory 06" onerror="this.style.display='none';this.parentElement.classList.add('placeholder');this.parentElement.querySelector('figcaption').textContent='06.JPG'"><figcaption>06 / still smiling</figcaption></figure>
+</div>
+</div>
+</section>
+
+<section class="memory warm">
+<div class="container">
+<div class="mono label reveal">03 / a moving film</div>
+<h2 class="title reveal delay1">A hundred little<br>reasons to remember.</h2>
+<p class="copy reveal delay2">Like a film strip of the days that quietly became part of the story.</p>
+<div class="film reveal delay2"><div class="filmTrack">
+<img src="photos/07.jpg" alt=""><img src="photos/08.jpg" alt=""><img src="photos/09.jpg" alt=""><img src="photos/10.jpg" alt=""><img src="photos/11.jpg" alt="">
+<img src="photos/07.jpg" alt=""><img src="photos/08.jpg" alt=""><img src="photos/09.jpg" alt=""><img src="photos/10.jpg" alt=""><img src="photos/11.jpg" alt="">
+</div></div>
+</div>
+</section>
+
+<section class="memory dark">
+<div class="container">
+<div class="mono label reveal">04 / the timeline</div>
+<h2 class="title reveal delay1">Days become<br>memories.</h2>
+<div class="timeline">
+<div class="event reveal"><h3>then</h3><p>We didn't know which random moments would matter later.</p></div>
+<div class="event reveal delay1"><h3>somewhere along the way</h3><p>Photos became little time machines. One look and suddenly you're there again.</p></div>
+<div class="event reveal delay2"><h3>today</h3><p>Another year. Another chapter. A few more memories worth keeping.</p></div>
+<div class="event reveal delay3"><h3>always</h3><p>And hopefully, many more moments waiting to be made.</p></div>
+</div>
+</div>
+</section>
+
+<section class="memory paper">
+<div class="container">
+<div class="mono label reveal">05 / a note</div>
+<div class="letter reveal delay1">
+<div class="mono">PRIVATE NOTE · DO NOT LOSE</div>
+<h2>Happy Birthday.</h2>
+<p>Today isn't only about getting another year older.</p>
+<p>It's about everything you've lived, everyone you've met, every laugh, every hard day, every little victory — all the pieces that made you <em>you</em>.</p>
+<p>So here's to another year of moments that deserve to be remembered.</p>
+<div class="sign">with love, always.</div>
+</div>
+</div>
+</section>
+
+<section class="birthday">
+<div class="ring"></div><div class="ring r2"></div>
+<div class="container">
+<div class="mono label reveal">06 / the reason for this little archive</div>
+<h2 class="reveal delay1">Happy<br><span>Birthday.</span></h2>
+<div class="age reveal delay2">जन्मदिन मुबारक · FELIZ CUMPLEAÑOS · 誕生日おめでとう · BON ANNIVERSAIRE</div>
+<p class="final reveal delay3">May this year give you more reasons to smile,<br>more places to go, more people to love,<br>and memories you won't want to delete.</p>
+<button class="start reveal delay3" onclick="window.scrollTo({top:0,behavior:'smooth'})"><span class="disc">↑</span><span>revisit the memories</span></button>
+</div>
+</section>
+
+<button class="floating" id="musicFloat">♫</button>
+
+<script>
+const song=document.getElementById('song'),start=document.getElementById('startSong'),state=document.getElementById('songState'),floatBtn=document.getElementById('musicFloat'),progress=document.getElementById('progress');
+function ui(){const on=!song.paused;start.classList.toggle('playing',on);start.querySelector('.disc').textContent=on?'Ⅱ':'▶';start.querySelector('span:nth-child(2)').textContent=on?'song is playing':'start the song';state.textContent=on?'song.mp3 · playing softly while you remember':'song.mp3 · press once, then scroll';floatBtn.textContent=on?'Ⅱ':'♫'}
+async function music(){if(song.paused){try{await song.play()}catch(e){state.textContent='Put song.mp3 beside index.html'}}else song.pause();ui()}
+start.onclick=music;floatBtn.onclick=music;song.onplay=ui;song.onpause=ui;
+addEventListener('scroll',()=>{let max=document.documentElement.scrollHeight-innerHeight;progress.style.width=(max?scrollY/max*100:0)+'%'},{passive:true});
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.12});
+document.querySelectorAll('.reveal,.photo').forEach(x=>obs.observe(x));
+setTimeout(()=>{if(scrollY<20){scrollTo({top:55,behavior:'smooth'});setTimeout(()=>scrollTo({top:0,behavior:'smooth'}),800)}},2200);
+</script>
+</body>
+</html>
